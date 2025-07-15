@@ -22,7 +22,7 @@ Accept: application/json
 
 ### 2. Obtener un producto por su código
 # Reemplaza '1' con un código de producto que exista en tu base de datos.
-GET {{api_url}}/productos/
+GET {{api_url}}/productos/201
 Accept: application/json
 
 ### 2.1 Obtener un producto con un código inexistente (debería dar 404)

@@ -9,6 +9,8 @@ const {
     searchProduct,
     getProductByCategory,
     priceRange,
+    getProductsBulk,
+    createBulkProducts,
 
     } = require("../controllers/productController");
 
@@ -27,5 +29,7 @@ router.post("/productos", createProduct);
 router.put("/productos/:codigo", updateProduct);
 
 router.delete("/productos/:codigo", deleteProduct);
+
+router.post('/productos/masivo', createBulkProducts);
 
 module.exports = router;

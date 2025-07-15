@@ -164,6 +164,37 @@ const priceRange = async (req, res) => {
 }
 };
 
+const createBulkProducts = async (req, res) => {
+  try {
+    const products = req.body;
+
+    if (!Array.isArray(products) || products.length === 0) {
+      return res.status(400).json({ message: 'A non-empty array of products is required' });
+    }
+
+    // Optional: filter out duplicates by checking if "codigo" already exists
+    const existingCodes = await Product.find({ codigo: { $in: products.map(p => p.codigo) } });
+    const existingCodesSet = new Set(existingCodes.map(p => p.codigo));
+
+    const newProducts = products.filter(p => !existingCodesSet.has(p.codigo));
+
+    if (newProducts.length === 0) {
+      return res.status(409).json({ message: 'All product codes already exist' });
+    }
+
+    const inserted = await Product.insertMany(newProducts);
+
+    res.status(201).json({
+      message: `${inserted.length} product(s) inserted successfully`,
+      inserted
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error inserting products', error });
+  }
+};
+
+
 
 module.exports = {
     getProductAll,
@@ -174,4 +205,5 @@ module.exports = {
     searchProduct,
     getProductByCategory,
     priceRange,
+    createBulkProducts,
 };
