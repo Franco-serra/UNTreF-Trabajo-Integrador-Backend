@@ -22,7 +22,7 @@ Accept: application/json
 
 ### 2. Obtener un producto por su código
 # Reemplaza '1' con un código de producto que exista en tu base de datos.
-GET {{api_url}}/productos/5243
+GET {{api_url}}/productos/
 Accept: application/json
 
 ### 2.1 Obtener un producto con un código inexistente (debería dar 404)
@@ -36,7 +36,7 @@ POST {{api_url}}/productos
 Content-Type: application/json
 
 {
-    "codigo": 101,
+    "codigo": 102,
     "nombre": "Teclado Luminoso RGB",
     "precio": 65.50,
     "categoria": ["Accesorios", "Computación", "Gaming"]
@@ -45,16 +45,17 @@ Content-Type: application/json
 ### 4. Modificar un producto existente
 # Reemplaza '1' con un código de producto que exista.
 # Solo se necesita enviar los campos a modificar.
-PUT {{api_url}}/productos/8101
+PUT {{api_url}}/productos/102
 Content-Type: application/json
 
 {
-    "precio": 951.00
+    "nombre": "Teclado Mecánico RGB",
+    "precio": 1009
 }
 
 ### 5. Eliminar un producto
 # Reemplaza '2' con un código de producto que desees eliminar.
-DELETE {{api_url}}/productos/2
+DELETE {{api_url}}/productos/102
 Accept: application/json
 
 
@@ -63,7 +64,7 @@ Accept: application/json
 
 ### 6. Buscar productos por término
 # Busca productos que contengan 'Laptop' en su nombre.
-GET {{api_url}}/productos/buscar?q=Laptop
+GET {{api_url}}/productos/buscar?q=rgb
 Accept: application/json
 
 ### 7. Filtrar productos por categoría
